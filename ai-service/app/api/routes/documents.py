@@ -1,7 +1,7 @@
 from fastapi import APIRouter, File, UploadFile, HTTPException
 from app.services.pdf_service import extract_text_from_pdf
 from app.services.text_processing_service import process_extracted_text
-from app.services.openai_service import extract_project_intelligence
+from app.services.groq_service import extract_project_intelligence
 from app.services.project_intelligence_validation_service import validate_project_intelligence
 
 router = APIRouter()
@@ -65,7 +65,7 @@ async def process_document(file: UploadFile = File(...)):
     # Step 2: Clean and normalize the extracted text
     processing_result = process_extracted_text(extraction_result["pages"])
 
-    # Step 3: Extract project intelligence with OpenAI (if text is available)
+    # Step 3: Extract project intelligence with Groq (if text is available)
     intelligence_result = None
     validated_result = None
     if processing_result["metadata"]["hasMeaningfulText"]:
@@ -100,12 +100,13 @@ async def process_document(file: UploadFile = File(...)):
 
     # Add validated intelligence if available
     if validated_result:
-        response["intelligence"] = validated_result
-        if validated_result.get("success"):
+        intelligence_dict = validated_result.model_dump() if hasattr(validated_result, 'model_dump') else vars(validated_result)
+        response["intelligence"] = intelligence_dict
+        if intelligence_dict.get("success"):
             response["message"] = "PDF processed and project intelligence extracted successfully"
         else:
             response["message"] = "PDF processed but intelligence extraction failed"
-            response["intelligenceError"] = validated_result.get("message")
+            response["intelligenceError"] = intelligence_dict.get("message")
     elif intelligence_result:
         # Intelligence extraction failed
         response["intelligence"] = intelligence_result
