@@ -12,8 +12,9 @@ class Settings:
     # Node.js backend URL (for future inter-service communication)
     BACKEND_URL: str = os.getenv("BACKEND_URL", "http://localhost:3000")
 
-    # AI/LLM settings (placeholder for future Gemini integration)
-    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+    # Groq LLM settings
+    GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
+    GROQ_MODEL: str = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
 
     # Vector database settings (placeholder for future RAG)
     VECTOR_DB_PATH: str = os.getenv("VECTOR_DB_PATH", "./data/vectordb")

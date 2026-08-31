@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
-from app.api.routes import health, documents, analyze, chat
+from app.api.routes import health, documents, analyze, chat, ai
 from app.config.settings import settings
 
 # Load environment variables from .env file
@@ -31,6 +31,7 @@ app.include_router(health.router)
 app.include_router(documents.router, prefix="/api/documents")
 app.include_router(analyze.router, prefix="/api/analyze")
 app.include_router(chat.router, prefix="/api/chat")
+app.include_router(ai.router, prefix="/api/ai")
 
 
 @app.get("/")
