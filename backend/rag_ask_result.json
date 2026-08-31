@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "question": "What is the timeline risk?",
+  "documentId": "8b579fd7-73f1-46ff-8bbb-e320f9414149",
+  "documentName": "test-valid.pdf",
+  "answer": "- The timeline risk is that it may be too aggressive.",
+  "sources": [
+    {
+      "chunkIndex": 0,
+      "similarity": 0.5755
+    }
+  ],
+  "metadata": {
+    "chunksRetrieved": 1,
+    "topK": 5,
+    "similarityThreshold": 0.3,
+    "processingTimeMs": 1364
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "question": "When must the setup be completed?",
+  "documentId": "8b579fd7-73f1-46ff-8bbb-e320f9414149",
+  "retrieval": {
+    "topK": 5,
+    "chunksFound": 1,
+    "chunks": [
+      {
+        "chunkIndex": 0,
+        "text": "Project Document\nThis document contains tasks and risks for the project.\nTask: Complete setup by Friday\nRisk: Timeline may be too aggressive",
+        "characterCount": 140,
+        "similarity": 0.3948
+      }
+    ]
+  }
+}

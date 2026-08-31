@@ -1,5 +1,86 @@
 @import "tailwindcss";
 
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+@theme {
+  --color-background: #09090b;
+  /* Very dark zinc */
+  --color-foreground: #fafafa;
+  --color-panel: rgba(24, 24, 27, 0.6);
+  /* Zinc-900 with transparency */
+  --color-panel-border: rgba(63, 63, 70, 0.4);
+  --color-brand-primary: #8b5cf6;
+  /* Violet */
+  --color-brand-secondary: #3b82f6;
+  /* Blue */
+}
+
+@layer base {
+  * {
+    border-color: var(--color-panel-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    /* Prevent body scroll, layout handles it */
+  }
+
+  /* Background Mesh/Glow effect */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.03) 0%, transparent 40%);
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    background-color: var(--color-panel);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-width: 1px;
+    border-color: var(--color-panel-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Modern soft button */
+  .btn-soft {
+    @apply flex items-center justify-center gap-2 px-4 py-2 rounded-xl transition-all duration-300;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .btn-soft:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+  }
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
