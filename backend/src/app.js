@@ -6,7 +6,7 @@ import documentRoutes from './routes/document.routes.js';
 import documentRetrievalRoutes from './routes/documentRetrieval.routes.js';
 import databaseRoutes from './routes/database.routes.js';
 import vectorStorageRoutes from './routes/vectorStorage.routes.js';
-import semanticRetrievalRoutes from './routes/semanticRetrieval.routes.js';
+import ragRoutes from './routes/rag.routes.js';
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.use('/api', documentRoutes);
 app.use('/api', documentRetrievalRoutes);
 app.use('/api', databaseRoutes);
 app.use('/api', vectorStorageRoutes);
-app.use('/api', semanticRetrievalRoutes);
+app.use('/api', ragRoutes);
 
 // 404 handler
 app.use((req, res) => {
