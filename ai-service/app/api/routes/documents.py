@@ -1,7 +1,8 @@
 from fastapi import APIRouter, File, UploadFile, HTTPException
 from app.services.pdf_service import extract_text_from_pdf
 from app.services.text_processing_service import process_extracted_text
-from app.services.openai_service import analyze_document
+from app.services.openai_service import extract_project_intelligence
+from app.services.project_intelligence_validation_service import validate_project_intelligence
 
 router = APIRouter()
 
@@ -22,8 +23,8 @@ def upload_document():
 async def process_document(file: UploadFile = File(...)):
     """
     Receive a PDF document from Node.js backend for processing.
-    Validates the file, extracts text, cleans it, analyzes it with AI,
-    and returns structured results.
+    Validates the file, extracts text, cleans it, extracts project intelligence,
+    validates the intelligence, and returns structured results.
     """
     # Validate file exists
     if not file:
@@ -64,13 +65,20 @@ async def process_document(file: UploadFile = File(...)):
     # Step 2: Clean and normalize the extracted text
     processing_result = process_extracted_text(extraction_result["pages"])
 
-    # Step 3: Analyze document with OpenAI (if text is available)
-    analysis_result = None
+    # Step 3: Extract project intelligence with OpenAI (if text is available)
+    intelligence_result = None
+    validated_result = None
     if processing_result["metadata"]["hasMeaningfulText"]:
-        analysis_result = analyze_document(
+        intelligence_result = extract_project_intelligence(
             processing_result["combinedText"],
             file.filename
         )
+
+        # Step 4: Validate and normalize the extracted intelligence
+        if intelligence_result and intelligence_result.get("success"):
+            validated_result = validate_project_intelligence(
+                intelligence_result.get("intelligence", {})
+            )
 
     # Build and return the response
     response = {
@@ -89,14 +97,19 @@ async def process_document(file: UploadFile = File(...)):
         "pages": processing_result["pages"]
     }
 
-    # Add analysis if available
-    if analysis_result:
-        response["analysis"] = analysis_result
-        if analysis_result.get("success"):
-            response["message"] = "PDF processed and analyzed successfully"
+    # Add validated intelligence if available
+    if validated_result:
+        response["intelligence"] = validated_result
+        if validated_result.get("success"):
+            response["message"] = "PDF processed and project intelligence extracted successfully"
         else:
-            response["message"] = "PDF processed but analysis failed"
-            response["analysisError"] = analysis_result.get("error")
+            response["message"] = "PDF processed but intelligence extraction failed"
+            response["intelligenceError"] = validated_result.get("message")
+    elif intelligence_result:
+        # Intelligence extraction failed
+        response["intelligence"] = intelligence_result
+        response["message"] = "PDF processed but intelligence extraction failed"
+        response["intelligenceError"] = intelligence_result.get("error")
     else:
         response["message"] = "PDF processed but no meaningful text found for analysis"
 
