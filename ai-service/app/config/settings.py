@@ -19,5 +19,13 @@ class Settings:
     # Vector database settings (placeholder for future RAG)
     VECTOR_DB_PATH: str = os.getenv("VECTOR_DB_PATH", "./data/vectordb")
 
+    # RAG Embedding settings (free local model)
+    RAG_EMBEDDING_MODEL: str = os.getenv("RAG_EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
+    RAG_EMBEDDING_BATCH_SIZE: int = int(os.getenv("RAG_EMBEDDING_BATCH_SIZE", "32"))
+
+    # RAG Chunking settings
+    RAG_CHUNK_SIZE: int = int(os.getenv("RAG_CHUNK_SIZE", "1000"))
+    RAG_CHUNK_OVERLAP: int = int(os.getenv("RAG_CHUNK_OVERLAP", "200"))
+
 
 settings = Settings()

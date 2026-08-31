@@ -1,12 +1,18 @@
 """
 RAG-related API routes.
-Provides endpoints for document chunking and RAG preparation.
+Provides endpoints for document chunking, embedding generation, and RAG preparation.
 """
 
 from fastapi import APIRouter
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 from app.services.chunking_service import get_chunk_preview
+from app.services.embedding_service import (
+    get_embedding_preview,
+    get_embedding_config,
+    generate_embeddings_for_chunks,
+    chunk_and_embed
+)
 
 router = APIRouter()
 
@@ -16,6 +22,21 @@ class ChunkPreviewRequest(BaseModel):
     text: str
     chunkSize: Optional[int] = None
     chunkOverlap: Optional[int] = None
+
+
+class EmbedPreviewRequest(BaseModel):
+    """Request model for embed preview."""
+    text: str
+
+
+class EmbedChunksRequest(BaseModel):
+    """Request model for embedding multiple chunks."""
+    chunks: List[dict]
+
+
+class ChunkAndEmbedRequest(BaseModel):
+    """Request model for chunk + embed pipeline."""
+    text: str
 
 
 @router.post("/chunk-preview")
@@ -83,3 +104,85 @@ def get_chunk_config():
             }
         }
     }
+
+
+@router.post("/embed-preview")
+def preview_embedding(request: EmbedPreviewRequest):
+    """
+    Generate an embedding preview for a single text.
+    Development/testing endpoint - returns only a small preview of the embedding.
+
+    Request body:
+    - text: The text to generate an embedding for
+
+    Returns:
+    - Model name
+    - Embedding dimension
+    - Preview of first 3 values
+    """
+    if not request.text or not request.text.strip():
+        return {
+            "success": False,
+            "error": "No text provided"
+        }
+
+    result = get_embedding_preview(text=request.text)
+    return result
+
+
+@router.get("/embedding-config")
+def embedding_config():
+    """
+    Get the current embedding configuration.
+    Shows model name, batch size, and dimension.
+    """
+    return {
+        "success": True,
+        "configuration": get_embedding_config()
+    }
+
+
+@router.post("/embed-chunks")
+def embed_chunks(request: EmbedChunksRequest):
+    """
+    Generate embeddings for multiple chunks.
+    Accepts a list of chunks and returns them enriched with embeddings.
+
+    Request body:
+    - chunks: List of {"chunkIndex": int, "text": str}
+
+    Returns:
+    - Chunks with embeddings attached
+    - Model and dimension metadata
+    """
+    if not request.chunks or not isinstance(request.chunks, list):
+        return {
+            "success": False,
+            "error": "No chunks provided"
+        }
+
+    result = generate_embeddings_for_chunks(chunks=request.chunks)
+    return result
+
+
+@router.post("/chunk-and-embed")
+def chunk_and_embed_endpoint(request: ChunkAndEmbedRequest):
+    """
+    Complete RAG pipeline: chunk text and generate embeddings.
+    Combines chunking and embedding into a single call.
+
+    Request body:
+    - text: Cleaned document text to process
+
+    Returns:
+    - Chunks with embeddings
+    - Chunking and embedding metadata
+    """
+    if not request.text or not request.text.strip():
+        return {
+            "success": False,
+            "error": "No text provided"
+        }
+
+    result = chunk_and_embed(text=request.text)
+    return result
