@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Priority enum for tasks
+enum Priority {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+// Severity enum for risks
+enum Severity {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+// Document model - stores uploaded PDF information
+model Document {
+  id              String   @id @default(uuid())
+  originalName    String
+  storedFilename  String
+  mimeType        String   @default("application/pdf")
+  fileSize        Int
+  pageCount       Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relationships
+  tasks     Task[]
+  risks     Risk[]
+  decisions Decision[]
+
+  @@map("documents")
+}
+
+// Task model - extracted tasks from documents
+model Task {
+  id              String   @id @default(uuid())
+  documentId      String
+  title           String
+  description     String?
+  owner           String?
+  deadline        String?  // Flexible type for dates and relative phrases
+  priority        Priority?
+  sourcePageNumber Int?
+  sourceEvidence  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relationship to Document
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@index([documentId])
+  @@map("tasks")
+}
+
+// Risk model - extracted risks from documents
+model Risk {
+  id              String   @id @default(uuid())
+  documentId      String
+  title           String
+  description     String?
+  severity        Severity?
+  sourcePageNumber Int?
+  sourceEvidence  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relationship to Document
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@index([documentId])
+  @@map("risks")
+}
+
+// Decision model - extracted decisions from documents
+model Decision {
+  id              String   @id @default(uuid())
+  documentId      String
+  title           String
+  description     String?
+  sourcePageNumber Int?
+  sourceEvidence  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relationship to Document
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@index([documentId])
+  @@map("decisions")
+}
