@@ -89,7 +89,8 @@ export async function saveDocumentIntelligence({ fileMetadata, aiResponse, valid
     storedFilename: normalizeString(fileMetadata.storedFilename),
     mimeType: normalizeString(fileMetadata.mimeType) || 'application/pdf',
     fileSize: parseInt(fileMetadata.fileSize, 10) || 0,
-    pageCount: parseInt(aiResponse.pageCount, 10) || 0
+    pageCount: parseInt(aiResponse.pageCount, 10) || 0,
+    cleanedText: normalizeString(aiResponse.cleanedText)  // Preserved for RAG processing
   };
 
   if (!documentData.originalName || !documentData.storedFilename) {

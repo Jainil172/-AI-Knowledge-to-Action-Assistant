@@ -32,6 +32,7 @@ model Document {
   mimeType        String   @default("application/pdf")
   fileSize        Int
   pageCount       Int      @default(0)
+  cleanedText     String?  @db.Text  // Preserved cleaned text for RAG processing
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 

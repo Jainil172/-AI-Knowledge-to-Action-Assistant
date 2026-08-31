@@ -92,7 +92,8 @@ async def process_document(file: UploadFile = File(...)):
             "originalCharacterCount": processing_result["metadata"]["originalCharacterCount"],
             "cleanedCharacterCount": processing_result["metadata"]["cleanedCharacterCount"],
             "hasMeaningfulText": processing_result["metadata"]["hasMeaningfulText"],
-            "pagesWithContent": processing_result["metadata"]["pagesWithContent"]
+            "pagesWithContent": processing_result["metadata"]["pagesWithContent"],
+            "cleanedText": processing_result["combinedText"]  # Preserved for RAG processing
         },
         "pages": processing_result["pages"]
     }
