@@ -1,6 +1,7 @@
 """
 RAG-related API routes.
-Provides endpoints for document chunking, embedding generation, and RAG preparation.
+Provides endpoints for document chunking, embedding generation, RAG preparation,
+and grounded answer generation.
 """
 
 from fastapi import APIRouter
@@ -13,6 +14,7 @@ from app.services.embedding_service import (
     generate_embeddings_for_chunks,
     chunk_and_embed
 )
+from app.services.groq_service import generate_rag_answer
 
 router = APIRouter()
 
@@ -37,6 +39,12 @@ class EmbedChunksRequest(BaseModel):
 class ChunkAndEmbedRequest(BaseModel):
     """Request model for chunk + embed pipeline."""
     text: str
+
+
+class GenerateAnswerRequest(BaseModel):
+    """Request model for grounded RAG answer generation."""
+    question: str
+    chunks: List[dict]
 
 
 @router.post("/chunk-preview")
@@ -185,4 +193,37 @@ def chunk_and_embed_endpoint(request: ChunkAndEmbedRequest):
         }
 
     result = chunk_and_embed(text=request.text)
+    return result
+
+
+@router.post("/generate-answer")
+def generate_answer(request: GenerateAnswerRequest):
+    """
+    Generate a grounded RAG answer using Groq based on retrieved document chunks.
+    Internal endpoint for Node.js ↔ Python communication.
+    
+    Request body:
+    - question: The user's question
+    - chunks: List of retrieved chunks with chunkIndex and text
+    
+    Returns:
+    - Grounded answer based only on provided context
+    - Source citations
+    """
+    if not request.question or not request.question.strip():
+        return {
+            "success": False,
+            "error": "No question provided"
+        }
+    
+    if not request.chunks or not isinstance(request.chunks, list):
+        return {
+            "success": False,
+            "error": "No chunks provided"
+        }
+    
+    result = generate_rag_answer(
+        question=request.question,
+        chunks=request.chunks
+    )
     return result

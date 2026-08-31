@@ -1,8 +1,9 @@
 /**
  * Semantic Retrieval Service
  * 
- * Handles semantic similarity search for document chunks.
+ * Handles semantic similarity search for document chunks and grounded answer generation.
  * Uses free local Sentence Transformers embeddings and cosine similarity.
+ * Uses Groq (via Python service) for grounded answer generation.
  * 
  * Since pgvector extension is not available, similarity search is performed
  * in the application layer using cosine similarity on stored JSON embeddings.
@@ -245,5 +246,98 @@ export async function retrieveRelevantChunks(documentId, question, options = {})
       chunksFound: topChunks.length,
       chunks: topChunks
     }
+  };
+}
+
+/**
+ * Generate a grounded RAG answer using Groq via Python service.
+ * 
+ * @param {string} question - The user question
+ * @param {Array} chunks - Retrieved chunks with similarity scores
+ * @returns {Promise<Object>} Generated answer with sources
+ */
+export async function generateGroundedAnswer(question, chunks) {
+  // If no chunks provided, return no-context response
+  if (!chunks || chunks.length === 0) {
+    return {
+      success: true,
+      answer: "I could not find relevant information about this in the uploaded document.",
+      sources: []
+    };
+  }
+
+  try {
+    const response = await fetch(`${AI_SERVICE_URL}/api/rag/generate-answer`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question,
+        chunks: chunks.map(c => ({
+          chunkIndex: c.chunkIndex,
+          text: c.text,
+          similarity: c.similarity
+        }))
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Python service returned status ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!data.success) {
+      return {
+        success: false,
+        error: data.error || data.message || 'Failed to generate answer'
+      };
+    }
+
+    return {
+      success: true,
+      answer: data.answer,
+      sources: data.sources || []
+    };
+  } catch (error) {
+    console.error('Failed to generate answer:', error);
+    return {
+      success: false,
+      error: `Answer generation service unavailable: ${error.message}`
+    };
+  }
+}
+
+/**
+ * Retrieve relevant chunks and generate a grounded answer for a document.
+ * Complete RAG pipeline: retrieval + answer generation.
+ * 
+ * @param {string} documentId - The document ID
+ * @param {string} question - The user question
+ * @param {Object} options - Optional parameters (topK, threshold)
+ * @returns {Promise<Object>} Answer with sources
+ */
+export async function retrieveAndAnswer(documentId, question, options = {}) {
+  // Step 1: Retrieve relevant chunks
+  const retrievalResult = await retrieveRelevantChunks(documentId, question, options);
+
+  if (!retrievalResult.success) {
+    return retrievalResult;
+  }
+
+  const chunks = retrievalResult.retrieval?.chunks || [];
+
+  // Step 2: Generate answer using retrieved chunks
+  const answerResult = await generateGroundedAnswer(question, chunks);
+
+  if (!answerResult.success) {
+    return answerResult;
+  }
+
+  return {
+    success: true,
+    question: retrievalResult.question,
+    documentId,
+    answer: answerResult.answer,
+    sources: answerResult.sources
   };
 }

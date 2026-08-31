@@ -1,10 +1,10 @@
 /**
  * Semantic Retrieval Controller
  * 
- * Handles HTTP requests for semantic retrieval operations.
+ * Handles HTTP requests for semantic retrieval and RAG answer generation.
  */
 
-import { retrieveRelevantChunks } from '../services/semanticRetrievalService.js';
+import { retrieveRelevantChunks, retrieveAndAnswer } from '../services/semanticRetrievalService.js';
 
 /**
  * POST /api/documents/:id/retrieve
@@ -49,6 +49,54 @@ export async function retrieveForDocument(req, res) {
     res.status(500).json({
       success: false,
       error: 'Internal server error during semantic retrieval'
+    });
+  }
+}
+
+/**
+ * POST /api/documents/:id/ask
+ * 
+ * Retrieve relevant chunks and generate a grounded answer using Groq.
+ * Complete RAG pipeline endpoint.
+ * 
+ * Request body:
+ * {
+ *   "question": "What are the major risks in this project?",
+ *   "topK": 5
+ * }
+ */
+export async function askDocument(req, res) {
+  try {
+    const { id: documentId } = req.params;
+    const { question, topK, threshold } = req.body;
+
+    if (!documentId) {
+      return res.status(400).json({
+        success: false,
+        error: 'Document ID is required'
+      });
+    }
+
+    if (!question) {
+      return res.status(400).json({
+        success: false,
+        error: 'Question is required'
+      });
+    }
+
+    const result = await retrieveAndAnswer(documentId, question, { topK, threshold });
+
+    if (!result.success) {
+      const statusCode = result.statusCode || 400;
+      return res.status(statusCode).json(result);
+    }
+
+    res.json(result);
+  } catch (error) {
+    console.error('RAG ask error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error during answer generation'
     });
   }
 }

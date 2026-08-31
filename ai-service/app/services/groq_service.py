@@ -1,7 +1,7 @@
 """
 Groq LLM service layer.
-Handles connection to Groq API for all LLM operations including document analysis
-and structured project intelligence extraction.
+Handles connection to Groq API for all LLM operations including document analysis,
+structured project intelligence extraction, and grounded RAG answer generation.
 """
 
 import os
@@ -10,6 +10,25 @@ from groq import Groq
 
 # Maximum characters to send to Groq (approx 12K tokens)
 MAX_DOCUMENT_CHARS = 48000
+
+# System instructions for grounded RAG answers
+RAG_SYSTEM_PROMPT = """You are a project management assistant that answers questions based on uploaded documents.
+
+CRITICAL GROUNDING RULES:
+1. Answer ONLY using information present in the provided document context.
+2. Do NOT invent project information, fake deadlines, fake risks, or fake facts.
+3. Do NOT assume missing facts or create information not supported by the retrieved chunks.
+4. If the answer cannot be found in the provided context, clearly say: "I could not find this information in the uploaded document."
+5. Prefer direct, clear, and concise answers.
+6. Preserve uncertainty when the document is ambiguous.
+7. Do not claim that information exists when it is not in the retrieved chunks.
+8. Be helpful for project management teams.
+
+ANSWER STYLE:
+- Be clear and concise
+- Use bullet points for lists when appropriate
+- Reference specific details from the document when available
+- Acknowledge limitations in the document when relevant"""
 
 
 def get_groq_client() -> Groq:
@@ -408,5 +427,134 @@ Important rules:
             return {
                 "success": False,
                 "message": "Failed to extract project intelligence",
+                "error": error_msg
+            }
+
+
+def _build_rag_context(chunks: list) -> str:
+    """
+    Build context string from retrieved chunks for RAG answer generation.
+    
+    Args:
+        chunks: List of chunk objects with chunkIndex and text
+        
+    Returns:
+        Formatted context string
+    """
+    context_parts = []
+    for chunk in chunks:
+        chunk_idx = chunk.get("chunkIndex", "unknown")
+        text = chunk.get("text", "")
+        context_parts.append(f"[Source: Document Chunk {chunk_idx}]\n{text}")
+    
+    return "\n\n".join(context_parts)
+
+
+def generate_rag_answer(question: str, chunks: list) -> dict:
+    """
+    Generate a grounded RAG answer using Groq based on retrieved document chunks.
+    
+    Args:
+        question: The user's question
+        chunks: List of retrieved chunk objects with chunkIndex and text
+        
+    Returns:
+        Dictionary with answer and source information
+    """
+    model = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
+    
+    # Validate question
+    if not question or not isinstance(question, str) or not question.strip():
+        return {
+            "success": False,
+            "message": "Invalid question",
+            "error": "Question must be a non-empty string"
+        }
+    
+    # Validate chunks
+    if not chunks or not isinstance(chunks, list):
+        return {
+            "success": False,
+            "message": "No context provided",
+            "error": "Retrieved chunks are required for grounded answer generation"
+        }
+    
+    try:
+        client = get_groq_client()
+        
+        # Build context from chunks
+        context = _build_rag_context(chunks)
+        
+        # Build user prompt with context and question
+        user_prompt = f"""Based ONLY on the following document context, answer the question.
+
+If the answer is not found in the context, clearly state that the information was not found in the document.
+
+--- DOCUMENT CONTEXT ---
+{context}
+--- END OF CONTEXT ---
+
+Question: {question}
+
+Provide a clear, concise answer grounded in the document context above. If the information is not available, say so clearly."""
+        
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": RAG_SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt}
+            ],
+            model=model,
+            temperature=0.3,
+            max_tokens=1000
+        )
+        
+        response_text = chat_completion.choices[0].message.content.strip()
+        
+        # Build source citations
+        sources = []
+        for chunk in chunks:
+            source = {
+                "chunkIndex": chunk.get("chunkIndex"),
+                "similarity": chunk.get("similarity")
+            }
+            sources.append(source)
+        
+        return {
+            "success": True,
+            "message": "Answer generated successfully",
+            "answer": response_text,
+            "sources": sources
+        }
+        
+    except ValueError as e:
+        return {
+            "success": False,
+            "message": "Configuration error",
+            "error": str(e)
+        }
+    except Exception as e:
+        error_msg = str(e)
+        if "api_key" in error_msg.lower() or "unauthorized" in error_msg.lower():
+            return {
+                "success": False,
+                "message": "Invalid API key. Please check your GROQ_API_KEY.",
+                "error": "Authentication failed"
+            }
+        elif "rate" in error_msg.lower() or "limit" in error_msg.lower():
+            return {
+                "success": False,
+                "message": "Rate limit exceeded. Please try again later.",
+                "error": "Rate limit exceeded"
+            }
+        elif "model" in error_msg.lower():
+            return {
+                "success": False,
+                "message": f"Invalid model configuration: {model}",
+                "error": error_msg
+            }
+        else:
+            return {
+                "success": False,
+                "message": "Failed to generate answer",
                 "error": error_msg
             }
