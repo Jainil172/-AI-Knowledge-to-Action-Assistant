@@ -5,6 +5,7 @@ import aiRoutes from './routes/ai.routes.js';
 import documentRoutes from './routes/document.routes.js';
 import documentRetrievalRoutes from './routes/documentRetrieval.routes.js';
 import databaseRoutes from './routes/database.routes.js';
+import vectorStorageRoutes from './routes/vectorStorage.routes.js';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/api', aiRoutes);
 app.use('/api', documentRoutes);
 app.use('/api', documentRetrievalRoutes);
 app.use('/api', databaseRoutes);
+app.use('/api', vectorStorageRoutes);
 
 // 404 handler
 app.use((req, res) => {

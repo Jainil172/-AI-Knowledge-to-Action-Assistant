@@ -40,6 +40,7 @@ model Document {
   tasks     Task[]
   risks     Risk[]
   decisions Decision[]
+  chunks    DocumentChunk[]
 
   @@map("documents")
 }
@@ -100,4 +101,28 @@ model Decision {
 
   @@index([documentId])
   @@map("decisions")
+}
+
+// DocumentChunk model - stores document chunks with embeddings for RAG
+// Embeddings are stored as JSON arrays in a TEXT column for Prisma compatibility.
+// When pgvector extension is available, migrate the embedding column to vector(384).
+model DocumentChunk {
+  id                  String   @id @default(uuid())
+  documentId          String
+  chunkIndex          Int
+  text                String   @db.Text
+  characterCount      Int
+  embedding           String   @db.Text  // JSON array of floats, migrate to vector(384) with pgvector
+  embeddingModel      String   @default("sentence-transformers/all-MiniLM-L6-v2")
+  embeddingDimension  Int      @default(384)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  // Relationship to Document
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  // Uniqueness constraint: one chunk index per document
+  @@unique([documentId, chunkIndex])
+  @@index([documentId])
+  @@map("document_chunks")
 }
