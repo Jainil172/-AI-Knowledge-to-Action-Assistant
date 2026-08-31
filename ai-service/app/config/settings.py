@@ -14,7 +14,11 @@ class Settings:
 
     # Groq LLM settings
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
-    GROQ_MODEL: str = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+    GROQ_MODEL: str = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
+
+    # OpenAI LLM settings
+    OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
+    OPENAI_MODEL: str = os.getenv("OPENAI_MODEL", "gpt-5.6-luna")
 
     # Vector database settings (placeholder for future RAG)
     VECTOR_DB_PATH: str = os.getenv("VECTOR_DB_PATH", "./data/vectordb")
