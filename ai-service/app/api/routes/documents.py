@@ -1,6 +1,7 @@
 from fastapi import APIRouter, File, UploadFile, HTTPException
 from app.services.pdf_service import extract_text_from_pdf
 from app.services.text_processing_service import process_extracted_text
+from app.services.openai_service import analyze_document
 
 router = APIRouter()
 
@@ -21,7 +22,8 @@ def upload_document():
 async def process_document(file: UploadFile = File(...)):
     """
     Receive a PDF document from Node.js backend for processing.
-    Validates the file, extracts text, cleans it, and returns structured results.
+    Validates the file, extracts text, cleans it, analyzes it with AI,
+    and returns structured results.
     """
     # Validate file exists
     if not file:
@@ -62,17 +64,18 @@ async def process_document(file: UploadFile = File(...)):
     # Step 2: Clean and normalize the extracted text
     processing_result = process_extracted_text(extraction_result["pages"])
 
-    # Store combined text for future AI processing (in memory for now)
-    # This will be used by the AI analysis step later
-    request_state = {
-        "combinedText": processing_result["combinedText"],
-        "filename": file.filename
-    }
+    # Step 3: Analyze document with OpenAI (if text is available)
+    analysis_result = None
+    if processing_result["metadata"]["hasMeaningfulText"]:
+        analysis_result = analyze_document(
+            processing_result["combinedText"],
+            file.filename
+        )
 
     # Build and return the response
-    return {
+    response = {
         "success": extraction_result["success"],
-        "message": "PDF processed and text prepared successfully",
+        "message": "PDF processed successfully",
         "document": {
             "filename": file.filename,
             "contentType": file.content_type,
@@ -85,3 +88,16 @@ async def process_document(file: UploadFile = File(...)):
         },
         "pages": processing_result["pages"]
     }
+
+    # Add analysis if available
+    if analysis_result:
+        response["analysis"] = analysis_result
+        if analysis_result.get("success"):
+            response["message"] = "PDF processed and analyzed successfully"
+        else:
+            response["message"] = "PDF processed but analysis failed"
+            response["analysisError"] = analysis_result.get("error")
+    else:
+        response["message"] = "PDF processed but no meaningful text found for analysis"
+
+    return response
