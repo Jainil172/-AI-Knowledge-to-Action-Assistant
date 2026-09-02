@@ -1,0 +1,15 @@
+Project Atlas Status Report
+
+Project Status
+Project Atlas is developing a customer support analytics system. The planned release date is 30 October
+2026. The authentication module is complete, while the analytics dashboard is 85% complete.
+Current Issue
+The reporting API is unstable and is delaying integration testing.
+Tasks
+Riya must stabilize the reporting API by 15 September 2026. Aman must complete dashboard testing by 18
+September 2026. The QA team must prepare regression test cases by 20 September 2026.
+Risks
+If the reporting API remains unstable, the planned release may be delayed. The external analytics provider
+has also not confirmed the final API version.
+Decisions
+The team decided to release the analytics dashboard first and move advanced reporting features to Phase 2.

@@ -14,7 +14,7 @@ import { cosineSimilarity } from './vectorPersistenceService.js';
 const AI_SERVICE_URL = process.env.AI_SERVICE_URL || 'http://localhost:8000';
 const DEFAULT_TOP_K = 5;
 const MAX_TOP_K = 20;
-const DEFAULT_SIMILARITY_THRESHOLD = 0.3;
+const DEFAULT_SIMILARITY_THRESHOLD = 0.1;
 
 /**
  * Request question embedding from Python AI service.
@@ -137,6 +137,8 @@ export async function retrieveRelevantChunks(documentId, question, options = {})
       };
     })
     .filter((chunk) => chunk !== null);
+
+  console.log("SCORED CHUNKS RAW:", scoredChunks.map(c => ({ idx: c.chunkIndex, sim: c.similarity })));
 
   // Sort by similarity (descending)
   scoredChunks.sort((a, b) => b.similarity - a.similarity);

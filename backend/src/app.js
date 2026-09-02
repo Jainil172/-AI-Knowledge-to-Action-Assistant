@@ -7,6 +7,7 @@ import documentRetrievalRoutes from './routes/documentRetrieval.routes.js';
 import databaseRoutes from './routes/database.routes.js';
 import vectorStorageRoutes from './routes/vectorStorage.routes.js';
 import ragRoutes from './routes/rag.routes.js';
+import authRoutes from './routes/auth.routes.js';
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api', healthRoutes);
 app.use('/api', aiRoutes);
 app.use('/api', documentRoutes);

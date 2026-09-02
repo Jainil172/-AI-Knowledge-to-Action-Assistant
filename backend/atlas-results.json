@@ -1,0 +1,30 @@
+[
+  {
+    "q": "Q: What is the main problem in Project Atlas?",
+    "a": "A: The main problem in Project Atlas is that the **reporting API is unstable**, causing delays in integration testing."
+  },
+  {
+    "q": "Q: Who is responsible for stabilizing the reporting API?",
+    "a": "A: The reporting API must be stabilized by **Riya**."
+  },
+  {
+    "q": "Q: What is the deadline for stabilizing the reporting API?",
+    "a": "A: The deadline for stabilizing the reporting API is **15ΓÇ»SeptemberΓÇ»2026**."
+  },
+  {
+    "q": "Q: What is the biggest risk to the project release?",
+    "a": "A: - The biggest risk to the project release is that the reporting API remains unstable, which could delay the planned release."
+  },
+  {
+    "q": "Q: What decision was made about advanced reporting features?",
+    "a": "A: The team decided to **move advanced reporting features to PhaseΓÇ»2** and release the analytics dashboard first."
+  },
+  {
+    "q": "Q: When is the planned project release?",
+    "a": "A: The planned release date for Project Atlas is **30ΓÇ»OctoberΓÇ»2026**."
+  },
+  {
+    "q": "Q: Who is the CEO of the company?",
+    "a": "A: I could not find relevant information about this in the uploaded document."
+  }
+]

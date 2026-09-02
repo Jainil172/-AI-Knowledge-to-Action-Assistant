@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { sendPDFToAIService } from '../services/ai.service.js';
+import { sendPDFToAIService, generateDocumentChunks } from '../services/ai.service.js';
 import { saveDocumentIntelligence } from '../services/documentPersistenceService.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -43,20 +43,15 @@ export const uploadDocument = async (req, res) => {
 
   const intelligence = aiResponse.data?.intelligence;
 
-  if (!intelligence || !intelligence.success) {
-    return res.status(200).json({
-      success: true,
-      message: 'Document processed but no project intelligence could be extracted',
-      document: {
-        originalName: req.file.originalname,
-        filename: req.file.filename
-      },
-      aiService: aiResponse.data
-    });
+  let validatedIntelligence = { tasks: [], risks: [], decisions: [], keyTopics: [], peopleMentioned: [], importantPoints: [], missingOrUnclearInformation: [] };
+
+  if (intelligence && intelligence.success && intelligence.intelligence) {
+    validatedIntelligence = intelligence.intelligence;
   }
 
   try {
     const saved = await saveDocumentIntelligence({
+      userId: req.user.id,
       fileMetadata: {
         originalName: req.file.originalname,
         storedFilename: req.file.filename,
@@ -64,8 +59,13 @@ export const uploadDocument = async (req, res) => {
         fileSize: req.file.size
       },
       aiResponse: aiResponse.data?.document || {},
-      validatedIntelligence: intelligence.intelligence
+      validatedIntelligence: validatedIntelligence
     });
+
+    // Fire off RAG chunking in background
+    if (saved.document.cleanedText) {
+      generateDocumentChunks(saved.document.id, saved.document.cleanedText);
+    }
 
     res.status(201).json({
       success: true,

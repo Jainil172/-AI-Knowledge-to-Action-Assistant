@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import { uploadDocument } from '../controllers/document.controller.js';
 import upload from '../middleware/upload.js';
+import { authenticate } from '../middleware/auth.middleware.js';
 
 const router = Router();
 
-router.post('/documents/upload', async (req, res, next) => {
+router.post('/documents/upload', authenticate, async (req, res, next) => {
   upload.single('pdf')(req, res, (err) => {
     if (err) {
       console.error('Upload error:', err.name, err.message, err.code);

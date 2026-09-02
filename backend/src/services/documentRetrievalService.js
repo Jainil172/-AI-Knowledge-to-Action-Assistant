@@ -4,12 +4,13 @@ import prisma from '../config/prisma.js';
  * Get all documents with summary counts.
  * Supports pagination and sorting.
  */
-export async function getAllDocuments({ page = 1, limit = 10, sort = 'desc' }) {
+export async function getAllDocuments({ userId, page = 1, limit = 10, sort = 'desc' }) {
   const skip = (page - 1) * limit;
   const orderBy = { createdAt: sort === 'asc' ? 'asc' : 'desc' };
 
   const [documents, totalCount] = await Promise.all([
     prisma.document.findMany({
+      where: { userId },
       skip,
       take: limit,
       orderBy,
@@ -26,7 +27,7 @@ export async function getAllDocuments({ page = 1, limit = 10, sort = 'desc' }) {
         }
       }
     }),
-    prisma.document.count()
+    prisma.document.count({ where: { userId } })
   ]);
 
   const totalPages = Math.ceil(totalCount / limit);
@@ -58,9 +59,9 @@ export async function getAllDocuments({ page = 1, limit = 10, sort = 'desc' }) {
 /**
  * Get a single document with all its intelligence (tasks, risks, decisions).
  */
-export async function getDocumentById(id) {
+export async function getDocumentById(id, userId) {
   const document = await prisma.document.findUnique({
-    where: { id },
+    where: { id, userId },
     include: {
       tasks: {
         orderBy: { createdAt: 'desc' }

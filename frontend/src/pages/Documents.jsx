@@ -1,53 +1,175 @@
-import { UploadCloud, Search, Filter } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FileText, UploadCloud, ArrowRight, Calendar, ChevronRight, Search, AlertCircle } from 'lucide-react';
+import { documentsApi } from '../services/api';
 
 export default function Documents() {
+    const navigate = useNavigate();
+    const [docs, setDocs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [search, setSearch] = useState('');
+
+    useEffect(() => {
+        const fetch = async () => {
+            try {
+                const res = await documentsApi.list(1, 100);
+                const sorted = (res.data || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                setDocs(sorted);
+            } catch (err) {
+                setError('Failed to load documents. Please try again.');
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetch();
+    }, []);
+
+    const filtered = docs.filter(d =>
+        !search || d.originalName?.toLowerCase().includes(search.toLowerCase())
+    );
+
     return (
-        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500 ease-out fill-mode-both">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-white">Documents</h1>
-                    <p className="mt-1 text-gray-400">Manage and analyze your project files.</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            {/* Header */}
+            <div className="page-header">
+                <div className="page-header-info">
+                    <h1 className="page-title">Knowledge Base</h1>
+                    <p className="page-subtitle">
+                        Upload and explore documents that will be analyzed to extract actionable insights.
+                    </p>
                 </div>
-                <button className="flex items-center gap-2 px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg font-medium transition-colors shadow-lg shadow-indigo-500/25 shrink-0 w-fit">
-                    <UploadCloud className="h-5 w-5" />
-                    Upload PDF
+                <button className="btn btn-primary" onClick={() => navigate('/upload')}>
+                    <UploadCloud size={16} /> Upload Document
                 </button>
             </div>
 
-            <div className="glass-panel p-4 flex flex-col sm:flex-row gap-4 mb-6">
-                <div className="relative flex-1">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            {/* Filter bar */}
+            <div className="filter-bar">
+                <div className="filter-search-wrap">
+                    <Search size={16} color="var(--color-text-muted)" />
                     <input
-                        type="text"
-                        placeholder="Search documents by name or content..."
-                        className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all font-medium"
+                        id="docs-search"
+                        className="filter-search-input"
+                        placeholder="Search documents..."
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
                     />
                 </div>
-                <button className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 hover:bg-white/10 text-gray-300 hover:text-white rounded-lg font-medium transition-colors shrink-0">
-                    <Filter className="h-4 w-4" />
-                    Filters
-                </button>
+                {search && (
+                    <button className="btn btn-secondary btn-sm" onClick={() => setSearch('')}>Clear</button>
+                )}
             </div>
 
-            <div className="glass-panel flex flex-col items-center justify-center min-h-[500px] text-center p-8">
-                <div className="h-20 w-20 rounded-full bg-indigo-500/10 flex items-center justify-center mb-6">
-                    <UploadCloud className="h-10 w-10 text-indigo-400" />
+            {/* Content */}
+            {loading ? (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '80px 0', gap: '12px' }}>
+                    <div className="spinner" />
+                    <p style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>Loading documents...</p>
                 </div>
-                <h3 className="text-xl font-medium text-white mb-2">No documents found</h3>
-                <p className="max-w-md text-gray-400 mb-8 leading-relaxed">
-                    Start by uploading your first project document (PDF). Our AI will automatically extract intelligence and insights.
-                </p>
-
-                <div className="w-full max-w-xl mx-auto border-2 border-dashed border-white/10 rounded-2xl p-12 bg-white/5 hover:bg-white/10 hover:border-indigo-500/50 transition-all cursor-pointer group">
-                    <div className="flex flex-col items-center">
-                        <p className="text-sm font-medium text-gray-300 group-hover:text-white mb-1">
-                            Click to browse or drag and drop
-                        </p>
-                        <p className="text-xs text-gray-500">
-                            PDF up to 10MB
-                        </p>
+            ) : error ? (
+                <div className="card" style={{ padding: '40px' }}>
+                    <div className="empty-state">
+                        <div className="empty-state-icon" style={{ background: '#fef2f2', border: '1px solid #fecaca' }}>
+                            <AlertCircle size={22} color="#dc2626" />
+                        </div>
+                        <p className="empty-state-title">Something went wrong</p>
+                        <p className="empty-state-text">{error}</p>
+                        <button className="btn btn-secondary btn-sm" onClick={() => window.location.reload()}>Retry</button>
                     </div>
                 </div>
+            ) : filtered.length === 0 ? (
+                <div className="card" style={{ padding: '40px' }}>
+                    <div className="empty-state">
+                        <div className="empty-state-icon">
+                            <FileText size={24} />
+                        </div>
+                        <p className="empty-state-title">
+                            {search ? 'No documents match your search' : 'No documents yet'}
+                        </p>
+                        <p className="empty-state-text">
+                            {search
+                                ? 'Try a different search term or clear the filter.'
+                                : 'Add your first document to start generating actionable insights from your knowledge.'}
+                        </p>
+                        {!search && (
+                            <button className="btn btn-primary" onClick={() => navigate('/upload')}>
+                                <UploadCloud size={16} /> Upload Your First Document
+                            </button>
+                        )}
+                    </div>
+                </div>
+            ) : (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '16px' }}>
+                    {filtered.map(doc => (
+                        <DocumentCard key={doc.id} doc={doc} />
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
+function DocumentCard({ doc }) {
+    const navigate = useNavigate();
+    const tasksCount = doc.tasks?.length ?? 0;
+    const risksCount = doc.risks?.length ?? 0;
+    const decisionsCount = doc.decisions?.length ?? 0;
+
+    return (
+        <div
+            className="doc-card"
+            role="button"
+            tabIndex={0}
+            onClick={() => navigate(`/documents/${doc.id}`)}
+            onKeyDown={e => e.key === 'Enter' && navigate(`/documents/${doc.id}`)}
+            aria-label={`View document: ${doc.originalName}`}
+        >
+            {/* Top row */}
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                <div style={{
+                    width: 40, height: 40, borderRadius: 'var(--radius-md)',
+                    background: '#eff6ff', display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', flexShrink: 0
+                }}>
+                    <FileText size={18} color="var(--color-primary)" />
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--color-text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {doc.originalName}
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '3px', fontSize: '12px', color: 'var(--color-text-muted)' }}>
+                        <Calendar size={12} />
+                        {new Date(doc.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                        {doc.pageCount > 0 && <> · {doc.pageCount} pages</>}
+                    </div>
+                </div>
+                <ChevronRight size={16} color="var(--color-text-muted)" style={{ flexShrink: 0, marginTop: '2px' }} />
+            </div>
+
+            {/* Summary snippet */}
+            {doc.summary && (
+                <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                    {doc.summary}
+                </p>
+            )}
+
+            {/* Intelligence counts */}
+            <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+                {tasksCount > 0 && (
+                    <span className="badge badge-success">{tasksCount} task{tasksCount > 1 ? 's' : ''}</span>
+                )}
+                {risksCount > 0 && (
+                    <span className="badge badge-danger">{risksCount} risk{risksCount > 1 ? 's' : ''}</span>
+                )}
+                {decisionsCount > 0 && (
+                    <span className="badge" style={{ background: '#faf5ff', color: '#9333ea', borderColor: '#d8b4fe' }}>
+                        {decisionsCount} decision{decisionsCount > 1 ? 's' : ''}
+                    </span>
+                )}
+                {tasksCount + risksCount + decisionsCount === 0 && (
+                    <span className="badge badge-neutral">Processing...</span>
+                )}
             </div>
         </div>
     );

@@ -1,0 +1,17 @@
+Project Status Update – Cloud Migration
+Project: Cloud Migration Phase 2
+Date: September 1, 2026
+The engineering team has completed 70% of the migration. The remaining production databases must be
+migrated before September 20, 2026.
+Tasks:
+ Ravi will prepare the database migration checklist by September 5, 2026.
+ Priya will complete load testing before September 10, 2026.
+ The DevOps team will update the production rollback plan by September 12, 2026.
+Risks:
+ The current migration timeline is aggressive because database testing has not started.
+ Production downtime may exceed the planned two-hour maintenance window if rollback testing fails.
+ A dependency on the external security vendor may delay final approval.
+Decisions:
+ The team decided to use a phased migration instead of a single weekend cutover.
+ The production release will proceed only after successful rollback testing.
+ Daily progress meetings will continue until migration completion.

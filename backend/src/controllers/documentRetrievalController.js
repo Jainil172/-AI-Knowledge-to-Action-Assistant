@@ -38,7 +38,7 @@ export const listDocuments = async (req, res) => {
     const { page, limit } = parsePagination(req.query);
     const sort = req.query.sort === 'asc' ? 'asc' : 'desc';
 
-    const result = await getAllDocuments({ page, limit, sort });
+    const result = await getAllDocuments({ userId: req.user.id, page, limit, sort });
 
     res.status(200).json({
       success: true,
@@ -69,7 +69,7 @@ export const getDocument = async (req, res) => {
       });
     }
 
-    const document = await getDocumentById(id);
+    const document = await getDocumentById(id, req.user.id);
 
     if (!document) {
       return res.status(404).json({
@@ -106,7 +106,7 @@ export const getTasks = async (req, res) => {
       });
     }
 
-    const document = await getDocumentById(id);
+    const document = await getDocumentById(id, req.user.id);
     if (!document) {
       return res.status(404).json({
         success: false,
@@ -146,7 +146,7 @@ export const getRisks = async (req, res) => {
       });
     }
 
-    const document = await getDocumentById(id);
+    const document = await getDocumentById(id, req.user.id);
     if (!document) {
       return res.status(404).json({
         success: false,
@@ -186,7 +186,7 @@ export const getDecisions = async (req, res) => {
       });
     }
 
-    const document = await getDocumentById(id);
+    const document = await getDocumentById(id, req.user.id);
     if (!document) {
       return res.status(404).json({
         success: false,

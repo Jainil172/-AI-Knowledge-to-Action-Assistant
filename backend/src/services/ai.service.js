@@ -49,8 +49,35 @@ export const sendPDFToAIService = async (filePath, originalName) => {
     });
 
     const data = await response.json();
+    if (!response.ok) {
+      return { success: false, error: data.detail || data.message || 'AI service error' };
+    }
     return { success: true, data };
   } catch (error) {
     return { success: false, error: error.message };
+  }
+};
+
+// Start background task to generate embeddings and save chunks for RAG
+export const generateDocumentChunks = async (documentId, cleanedText) => {
+  if (!cleanedText) return;
+  try {
+    const response = await fetch(`${AI_SERVICE_URL}/api/rag/chunk-and-embed`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: cleanedText })
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success && data.chunks && data.chunks.length > 0) {
+        // Dynamically import vector service to store chunks in pg
+        const { storeDocumentChunks } = await import('./vectorPersistenceService.js');
+        await storeDocumentChunks(documentId, data.chunks, data.model);
+        console.log(`Document ${documentId}: Successfully stored ${data.chunks.length} RAG chunks.`);
+      }
+    }
+  } catch (err) {
+    console.error(`Failed to generate embeddings for ${documentId}:`, err);
   }
 };

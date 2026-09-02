@@ -24,24 +24,43 @@ enum Severity {
   LOW
 }
 
+// User model for authentication
+model User {
+  id           String     @id @default(uuid())
+  name         String
+  email        String     @unique
+  passwordHash String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  // Relationships
+  documents    Document[]
+
+  @@map("users")
+}
+
 // Document model - stores uploaded PDF information
 model Document {
   id              String   @id @default(uuid())
+  userId          String 
   originalName    String
   storedFilename  String
   mimeType        String   @default("application/pdf")
   fileSize        Int
   pageCount       Int      @default(0)
+  summary         String?  @db.Text  // AI-generated document summary
   cleanedText     String?  @db.Text  // Preserved cleaned text for RAG processing
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
   // Relationships
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   tasks     Task[]
   risks     Risk[]
   decisions Decision[]
   chunks    DocumentChunk[]
 
+  @@index([userId])
   @@map("documents")
 }
 

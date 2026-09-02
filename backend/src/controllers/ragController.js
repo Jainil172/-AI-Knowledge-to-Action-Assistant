@@ -6,6 +6,7 @@
  */
 
 import { askDocument, retrieveChunks, getHealthStatus } from '../services/ragService.js';
+import prisma from '../config/prisma.js';
 
 /**
  * POST /api/rag/ask
@@ -42,6 +43,11 @@ export async function askQuestion(req, res) {
           message: 'question is required in request body',
         },
       });
+    }
+
+    const doc = await prisma.document.findUnique({ where: { id: documentId, userId: req.user.id } });
+    if (!doc) {
+      return res.status(404).json({ success: false, error: { code: 'DOCUMENT_NOT_FOUND', message: 'Document not found or Unauthorized' } });
     }
 
     const result = await askDocument(documentId, question, { topK, threshold });
@@ -111,6 +117,11 @@ export async function retrieveDocumentChunks(req, res) {
           message: 'question is required in request body',
         },
       });
+    }
+
+    const doc = await prisma.document.findUnique({ where: { id: documentId, userId: req.user.id } });
+    if (!doc) {
+      return res.status(404).json({ success: false, error: { code: 'DOCUMENT_NOT_FOUND', message: 'Document not found or Unauthorized' } });
     }
 
     const result = await retrieveChunks(documentId, question, { topK, threshold });

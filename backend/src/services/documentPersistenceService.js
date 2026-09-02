@@ -83,13 +83,18 @@ function mapDecision(decision, documentId) {
  * Save complete document intelligence in a single Prisma transaction.
  * Returns the saved document with all related data.
  */
-export async function saveDocumentIntelligence({ fileMetadata, aiResponse, validatedIntelligence }) {
+export async function saveDocumentIntelligence({ userId, fileMetadata, aiResponse, validatedIntelligence }) {
+  // Extract summary from validated intelligence
+  const aiSummary = validatedIntelligence?.summary || null;
+
   const documentData = {
+    userId,
     originalName: normalizeString(fileMetadata.originalName),
     storedFilename: normalizeString(fileMetadata.storedFilename),
     mimeType: normalizeString(fileMetadata.mimeType) || 'application/pdf',
     fileSize: parseInt(fileMetadata.fileSize, 10) || 0,
     pageCount: parseInt(aiResponse.pageCount, 10) || 0,
+    summary: aiSummary,
     cleanedText: normalizeString(aiResponse.cleanedText)  // Preserved for RAG processing
   };
 

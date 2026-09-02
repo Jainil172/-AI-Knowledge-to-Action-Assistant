@@ -56,7 +56,7 @@ def test_groq_connection() -> dict:
     Returns:
         Dictionary with success status, model name, and response
     """
-    model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+    model = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
 
     try:
         client = get_groq_client()
@@ -123,7 +123,7 @@ def analyze_document(cleaned_text: str, filename: str) -> dict:
     Returns:
         Dictionary with structured analysis results
     """
-    model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+    model = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
 
     # Handle empty or very short text
     if not cleaned_text or not cleaned_text.strip():
@@ -260,7 +260,7 @@ def extract_project_intelligence(cleaned_text: str, filename: str) -> dict:
     Returns:
         Dictionary with structured project intelligence
     """
-    model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+    model = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
 
     # Handle empty or very short text
     if not cleaned_text or not cleaned_text.strip():

@@ -1,0 +1,28 @@
+DOC: Document_No_Tasks.pdf
+ Tasks: 0
+ Risks: 1
+ Decisions: 1
+DOC: Document_No_Risks.pdf
+ Tasks: 1
+ Risks: 0
+ Decisions: 1
+DOC: Document_No_Decisions.pdf
+ Tasks: 1
+ Risks: 1
+ Decisions: 0
+DOC: Document_Long.pdf
+ Tasks: 3
+ Risks: 1
+ Decisions: 1
+DOC: Document_Conflicting.pdf
+ Tasks: 1
+ Risks: 1
+ Decisions: 1
+DOC: Document_Pending_Mixed.pdf
+ Tasks: 1
+ Risks: 1
+ Decisions: 1
+DOC: Document_Irrelevant.pdf
+ Tasks: 1
+ Risks: 1
+ Decisions: 1

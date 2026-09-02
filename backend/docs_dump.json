@@ -1,0 +1,556 @@
+[
+  {
+    "id": "3fb7315b-f2f9-4bb6-bbdc-42808428190f",
+    "userId": "e2a4e4d1-cf75-4f1e-a077-999dc41002f7",
+    "originalName": "Project_Status_Update.pdf",
+    "storedFilename": "1788212379664-981943942.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 23064,
+    "pageCount": 1,
+    "summary": null,
+    "cleanedText": "Project Status Update – Cloud Migration\nProject: Cloud Migration Phase 2\nDate: September 1, 2026\nThe engineering team has completed 70% of the migration. The remaining production databases must be\nmigrated before September 20, 2026.\nTasks:\n Ravi will prepare the database migration checklist by September 5, 2026.\n Priya will complete load testing before September 10, 2026.\n The DevOps team will update the production rollback plan by September 12, 2026.\nRisks:\n The current migration timeline is aggressive because database testing has not started.\n Production downtime may exceed the planned two-hour maintenance window if rollback testing fails.\n A dependency on the external security vendor may delay final approval.\nDecisions:\n The team decided to use a phased migration instead of a single weekend cutover.\n The production release will proceed only after successful rollback testing.\n Daily progress meetings will continue until migration completion.",
+    "createdAt": "2026-08-31T21:39:44.105Z",
+    "updatedAt": "2026-08-31T21:39:44.105Z",
+    "tasks": [
+      {
+        "id": "c6a65715-bc41-4fc3-903e-e77a02241b6b",
+        "documentId": "3fb7315b-f2f9-4bb6-bbdc-42808428190f",
+        "title": "Prepare database migration checklist",
+        "description": "Ravi will prepare the database migration checklist",
+        "owner": "Ravi",
+        "deadline": "September 5, 2026",
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Ravi will prepare the database migration checklist by September 5, 2026.",
+        "createdAt": "2026-08-31T21:39:44.126Z",
+        "updatedAt": "2026-08-31T21:39:44.126Z"
+      },
+      {
+        "id": "03e38e30-bd09-4d06-9747-bf202970239f",
+        "documentId": "3fb7315b-f2f9-4bb6-bbdc-42808428190f",
+        "title": "Complete load testing",
+        "description": "Priya will complete load testing",
+        "owner": "Priya",
+        "deadline": "September 10, 2026",
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Priya will complete load testing before September 10, 2026.",
+        "createdAt": "2026-08-31T21:39:44.134Z",
+        "updatedAt": "2026-08-31T21:39:44.134Z"
+      },
+      {
+        "id": "dda45e4d-1a68-4c8a-b297-3470e3f6ae1f",
+        "documentId": "3fb7315b-f2f9-4bb6-bbdc-42808428190f",
+        "title": "Update production rollback plan",
+        "description": "DevOps team will update the production rollback plan",
+        "owner": "DevOps team",
+        "deadline": "September 12, 2026",
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "The DevOps team will update the production rollback plan by September 12, 2026.",
+        "createdAt": "2026-08-31T21:39:44.136Z",
+        "updatedAt": "2026-08-31T21:39:44.136Z"
+      }
+    ],
+    "risks": [
+      {
+        "id": "0ce4e8eb-6b60-49e2-b1ed-c6543339a3db",
+        "documentId": "3fb7315b-f2f9-4bb6-bbdc-42808428190f",
+        "title": "Aggressive migration timeline",
+        "description": "database testing has not started",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "The current migration timeline is aggressive because database testing has not started.",
+        "createdAt": "2026-08-31T21:39:44.138Z",
+        "updatedAt": "2026-08-31T21:39:44.138Z"
+      },
+      {
+        "id": "5296c024-c212-414f-980b-07aa0ad0351a",
+        "documentId": "3fb7315b-f2f9-4bb6-bbdc-42808428190f",
+        "title": "Potential extended downtime",
+        "description": "Production downtime may exceed the planned two-hour maintenance window if rollback testing fails",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Production downtime may exceed the planned two-hour maintenance window if rollback testing fails.",
+        "createdAt": "2026-08-31T21:39:44.140Z",
+        "updatedAt": "2026-08-31T21:39:44.140Z"
+      },
+      {
+        "id": "2940e2d0-c2eb-42ec-89fe-2e578cc8fec9",
+        "documentId": "3fb7315b-f2f9-4bb6-bbdc-42808428190f",
+        "title": "Vendor approval delay",
+        "description": "A dependency on the external security vendor may delay final approval",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "A dependency on the external security vendor may delay final approval.",
+        "createdAt": "2026-08-31T21:39:44.141Z",
+        "updatedAt": "2026-08-31T21:39:44.141Z"
+      }
+    ],
+    "decisions": [
+      {
+        "id": "b80946dc-1aa8-4b97-a197-6cd8c6deb950",
+        "documentId": "3fb7315b-f2f9-4bb6-bbdc-42808428190f",
+        "title": "Use phased migration",
+        "description": "instead of a single weekend cutover",
+        "sourcePageNumber": null,
+        "sourceEvidence": "The team decided to use a phased migration instead of a single weekend cutover.",
+        "createdAt": "2026-08-31T21:39:44.143Z",
+        "updatedAt": "2026-08-31T21:39:44.143Z"
+      },
+      {
+        "id": "09e84e32-f414-4439-8981-1e756b39dbcc",
+        "documentId": "3fb7315b-f2f9-4bb6-bbdc-42808428190f",
+        "title": "Release after rollback testing",
+        "description": "The production release will proceed only after successful rollback testing",
+        "sourcePageNumber": null,
+        "sourceEvidence": "The production release will proceed only after successful rollback testing.",
+        "createdAt": "2026-08-31T21:39:44.145Z",
+        "updatedAt": "2026-08-31T21:39:44.145Z"
+      },
+      {
+        "id": "251a4a0d-afa5-46d8-bcfe-dd5a487705b0",
+        "documentId": "3fb7315b-f2f9-4bb6-bbdc-42808428190f",
+        "title": "Continue daily progress meetings",
+        "description": "Daily progress meetings will continue until migration completion",
+        "sourcePageNumber": null,
+        "sourceEvidence": "Daily progress meetings will continue until migration completion.",
+        "createdAt": "2026-08-31T21:39:44.146Z",
+        "updatedAt": "2026-08-31T21:39:44.146Z"
+      }
+    ]
+  },
+  {
+    "id": "08ebe51b-9ed2-48b7-b963-dafec1128623",
+    "userId": "5427ccb5-3a6c-4188-8ef0-d68bbafb61e6",
+    "originalName": "Project_Status_Update.pdf",
+    "storedFilename": "1788212894751-870296418.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 23064,
+    "pageCount": 1,
+    "summary": "The Cloud Migration Phase 2 update reports 70% completion and outlines remaining tasks with deadlines. It highlights risks such as an aggressive timeline, potential extended downtime, and vendor delays, and confirms decisions to use a phased migration and tie release to rollback testing.",
+    "cleanedText": "Project Status Update – Cloud Migration\nProject: Cloud Migration Phase 2\nDate: September 1, 2026\nThe engineering team has completed 70% of the migration. The remaining production databases must be\nmigrated before September 20, 2026.\nTasks:\n Ravi will prepare the database migration checklist by September 5, 2026.\n Priya will complete load testing before September 10, 2026.\n The DevOps team will update the production rollback plan by September 12, 2026.\nRisks:\n The current migration timeline is aggressive because database testing has not started.\n Production downtime may exceed the planned two-hour maintenance window if rollback testing fails.\n A dependency on the external security vendor may delay final approval.\nDecisions:\n The team decided to use a phased migration instead of a single weekend cutover.\n The production release will proceed only after successful rollback testing.\n Daily progress meetings will continue until migration completion.",
+    "createdAt": "2026-08-31T21:48:18.550Z",
+    "updatedAt": "2026-08-31T21:48:18.550Z",
+    "tasks": [
+      {
+        "id": "f094b79d-2f15-48bf-81b3-631917011880",
+        "documentId": "08ebe51b-9ed2-48b7-b963-dafec1128623",
+        "title": "Prepare database migration checklist",
+        "description": "Prepare the database migration checklist",
+        "owner": "Ravi",
+        "deadline": "September 5, 2026",
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Ravi will prepare the database migration checklist by September 5, 2026.",
+        "createdAt": "2026-08-31T21:48:18.569Z",
+        "updatedAt": "2026-08-31T21:48:18.569Z"
+      },
+      {
+        "id": "537e15c6-bbda-4bb2-b22d-3157ddcdd7db",
+        "documentId": "08ebe51b-9ed2-48b7-b963-dafec1128623",
+        "title": "Complete load testing",
+        "description": "Complete load testing",
+        "owner": "Priya",
+        "deadline": "before September 10, 2026",
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Priya will complete load testing before September 10, 2026.",
+        "createdAt": "2026-08-31T21:48:18.581Z",
+        "updatedAt": "2026-08-31T21:48:18.581Z"
+      },
+      {
+        "id": "c8687181-bd0f-424b-98eb-72ee4c36d757",
+        "documentId": "08ebe51b-9ed2-48b7-b963-dafec1128623",
+        "title": "Update production rollback plan",
+        "description": "Update the production rollback plan",
+        "owner": "DevOps team",
+        "deadline": "September 12, 2026",
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "The DevOps team will update the production rollback plan by September 12, 2026.",
+        "createdAt": "2026-08-31T21:48:18.583Z",
+        "updatedAt": "2026-08-31T21:48:18.583Z"
+      }
+    ],
+    "risks": [
+      {
+        "id": "e1fa3fc6-eab3-4a5b-b700-b1903139dc5c",
+        "documentId": "08ebe51b-9ed2-48b7-b963-dafec1128623",
+        "title": "Aggressive migration timeline due to lack of database testing",
+        "description": "Because database testing has not started",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "The current migration timeline is aggressive because database testing has not started.",
+        "createdAt": "2026-08-31T21:48:18.586Z",
+        "updatedAt": "2026-08-31T21:48:18.586Z"
+      },
+      {
+        "id": "e71e7d57-d188-47ad-806b-cddda44f5a9c",
+        "documentId": "08ebe51b-9ed2-48b7-b963-dafec1128623",
+        "title": "Potential extended downtime if rollback testing fails",
+        "description": "Production downtime may exceed the planned two-hour maintenance window if rollback testing fails",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Production downtime may exceed the planned two-hour maintenance window if rollback testing fails.",
+        "createdAt": "2026-08-31T21:48:18.589Z",
+        "updatedAt": "2026-08-31T21:48:18.589Z"
+      },
+      {
+        "id": "269a5435-50df-4263-b19a-8dd7314220d4",
+        "documentId": "08ebe51b-9ed2-48b7-b963-dafec1128623",
+        "title": "Dependency on external security vendor may delay final approval",
+        "description": "A dependency on the external security vendor may delay final approval",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "A dependency on the external security vendor may delay final approval.",
+        "createdAt": "2026-08-31T21:48:18.591Z",
+        "updatedAt": "2026-08-31T21:48:18.591Z"
+      }
+    ],
+    "decisions": [
+      {
+        "id": "dafd02e9-553c-4c50-96cf-571cb370d39b",
+        "documentId": "08ebe51b-9ed2-48b7-b963-dafec1128623",
+        "title": "Use phased migration instead of single weekend cutover",
+        "description": "The team decided to use a phased migration instead of a single weekend cutover",
+        "sourcePageNumber": null,
+        "sourceEvidence": "The team decided to use a phased migration instead of a single weekend cutover.",
+        "createdAt": "2026-08-31T21:48:18.594Z",
+        "updatedAt": "2026-08-31T21:48:18.594Z"
+      },
+      {
+        "id": "72fe0073-cf3c-433a-a335-b4fe00b40b3a",
+        "documentId": "08ebe51b-9ed2-48b7-b963-dafec1128623",
+        "title": "Production release contingent on successful rollback testing",
+        "description": "The production release will proceed only after successful rollback testing",
+        "sourcePageNumber": null,
+        "sourceEvidence": "The production release will proceed only after successful rollback testing.",
+        "createdAt": "2026-08-31T21:48:18.596Z",
+        "updatedAt": "2026-08-31T21:48:18.596Z"
+      },
+      {
+        "id": "9e469ec5-8797-4400-81f4-1dc5c95fea66",
+        "documentId": "08ebe51b-9ed2-48b7-b963-dafec1128623",
+        "title": "Daily progress meetings continue until migration completion",
+        "description": "Daily progress meetings will continue until migration completion",
+        "sourcePageNumber": null,
+        "sourceEvidence": "Daily progress meetings will continue until migration completion.",
+        "createdAt": "2026-08-31T21:48:18.598Z",
+        "updatedAt": "2026-08-31T21:48:18.598Z"
+      }
+    ]
+  },
+  {
+    "id": "e22d472d-9fd0-405a-a1a3-2f09fd43491d",
+    "userId": "e2a4e4d1-cf75-4f1e-a077-999dc41002f7",
+    "originalName": "Project_Status_Update.pdf",
+    "storedFilename": "1788371271503-718769168.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 23064,
+    "pageCount": 1,
+    "summary": "The Cloud Migration Phase 2 update reports 70% completion and outlines tasks to finish by September 20, 2026. Key actions include checklist preparation, load testing, and rollback plan updates, while risks around aggressive timing and potential downtime are highlighted. The team has decided on a phased migration and will proceed only after successful rollback testing.",
+    "cleanedText": "Project Status Update – Cloud Migration\nProject: Cloud Migration Phase 2\nDate: September 1, 2026\nThe engineering team has completed 70% of the migration. The remaining production databases must be\nmigrated before September 20, 2026.\nTasks:\n Ravi will prepare the database migration checklist by September 5, 2026.\n Priya will complete load testing before September 10, 2026.\n The DevOps team will update the production rollback plan by September 12, 2026.\nRisks:\n The current migration timeline is aggressive because database testing has not started.\n Production downtime may exceed the planned two-hour maintenance window if rollback testing fails.\n A dependency on the external security vendor may delay final approval.\nDecisions:\n The team decided to use a phased migration instead of a single weekend cutover.\n The production release will proceed only after successful rollback testing.\n Daily progress meetings will continue until migration completion.",
+    "createdAt": "2026-09-02T17:47:56.454Z",
+    "updatedAt": "2026-09-02T17:47:56.454Z",
+    "tasks": [
+      {
+        "id": "d58fd363-cae6-46ad-b9aa-000a33f7cbf1",
+        "documentId": "e22d472d-9fd0-405a-a1a3-2f09fd43491d",
+        "title": "Prepare database migration checklist",
+        "description": "Ravi will prepare the database migration checklist",
+        "owner": "Ravi",
+        "deadline": "September 5, 2026",
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Ravi will prepare the database migration checklist by September 5, 2026.",
+        "createdAt": "2026-09-02T17:47:56.475Z",
+        "updatedAt": "2026-09-02T17:47:56.475Z"
+      },
+      {
+        "id": "189ab74b-ac22-4b3b-a53c-d50f1ee8c959",
+        "documentId": "e22d472d-9fd0-405a-a1a3-2f09fd43491d",
+        "title": "Complete load testing",
+        "description": "Priya will complete load testing",
+        "owner": "Priya",
+        "deadline": "before September 10, 2026",
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Priya will complete load testing before September 10, 2026.",
+        "createdAt": "2026-09-02T17:47:56.483Z",
+        "updatedAt": "2026-09-02T17:47:56.483Z"
+      },
+      {
+        "id": "58b1b33a-da5f-40da-9484-f2a9cf2863eb",
+        "documentId": "e22d472d-9fd0-405a-a1a3-2f09fd43491d",
+        "title": "Update production rollback plan",
+        "description": "The DevOps team will update the production rollback plan",
+        "owner": "DevOps team",
+        "deadline": "September 12, 2026",
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "The DevOps team will update the production rollback plan by September 12, 2026.",
+        "createdAt": "2026-09-02T17:47:56.485Z",
+        "updatedAt": "2026-09-02T17:47:56.485Z"
+      }
+    ],
+    "risks": [
+      {
+        "id": "3e7ae9fa-d768-4665-907c-195519efc87b",
+        "documentId": "e22d472d-9fd0-405a-a1a3-2f09fd43491d",
+        "title": "Aggressive migration timeline",
+        "description": "The current migration timeline is aggressive because database testing has not started.",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "The current migration timeline is aggressive because database testing has not started.",
+        "createdAt": "2026-09-02T17:47:56.488Z",
+        "updatedAt": "2026-09-02T17:47:56.488Z"
+      },
+      {
+        "id": "ad870c46-7159-4c01-b8a5-87e579945e4f",
+        "documentId": "e22d472d-9fd0-405a-a1a3-2f09fd43491d",
+        "title": "Excessive production downtime",
+        "description": "Production downtime may exceed the planned two-hour maintenance window if rollback testing fails.",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Production downtime may exceed the planned two-hour maintenance window if rollback testing fails.",
+        "createdAt": "2026-09-02T17:47:56.491Z",
+        "updatedAt": "2026-09-02T17:47:56.491Z"
+      },
+      {
+        "id": "7eb1425f-b87f-4d4d-a9fd-edb2bad060c0",
+        "documentId": "e22d472d-9fd0-405a-a1a3-2f09fd43491d",
+        "title": "Vendor dependency delay",
+        "description": "A dependency on the external security vendor may delay final approval.",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "A dependency on the external security vendor may delay final approval.",
+        "createdAt": "2026-09-02T17:47:56.493Z",
+        "updatedAt": "2026-09-02T17:47:56.493Z"
+      }
+    ],
+    "decisions": [
+      {
+        "id": "3ca91c17-3cf8-4ee4-a687-294c07f9c8c6",
+        "documentId": "e22d472d-9fd0-405a-a1a3-2f09fd43491d",
+        "title": "Use phased migration",
+        "description": "The team decided to use a phased migration instead of a single weekend cutover.",
+        "sourcePageNumber": null,
+        "sourceEvidence": "The team decided to use a phased migration instead of a single weekend cutover.",
+        "createdAt": "2026-09-02T17:47:56.495Z",
+        "updatedAt": "2026-09-02T17:47:56.495Z"
+      },
+      {
+        "id": "a696c434-75e2-44ba-bed4-a0418e65592b",
+        "documentId": "e22d472d-9fd0-405a-a1a3-2f09fd43491d",
+        "title": "Release after rollback testing",
+        "description": "The production release will proceed only after successful rollback testing.",
+        "sourcePageNumber": null,
+        "sourceEvidence": "The production release will proceed only after successful rollback testing.",
+        "createdAt": "2026-09-02T17:47:56.496Z",
+        "updatedAt": "2026-09-02T17:47:56.496Z"
+      },
+      {
+        "id": "e3deee29-56e0-4a17-a3d4-c7780498c0a2",
+        "documentId": "e22d472d-9fd0-405a-a1a3-2f09fd43491d",
+        "title": "Continue daily progress meetings",
+        "description": "Daily progress meetings will continue until migration completion.",
+        "sourcePageNumber": null,
+        "sourceEvidence": "Daily progress meetings will continue until migration completion.",
+        "createdAt": "2026-09-02T17:47:56.498Z",
+        "updatedAt": "2026-09-02T17:47:56.498Z"
+      }
+    ]
+  },
+  {
+    "id": "8e275d78-07ca-468d-be54-b7c950a61717",
+    "userId": "e2a4e4d1-cf75-4f1e-a077-999dc41002f7",
+    "originalName": "01_Project_Status.pdf",
+    "storedFilename": "1788372274816-573503984.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 27140,
+    "pageCount": 1,
+    "summary": "Project Atlas is developing a customer support analytics system with a planned release on 30 October 2026. The authentication module is complete and the analytics dashboard is 85% complete. Current issues include an unstable reporting API delaying integration testing.",
+    "cleanedText": "Project Atlas Status Report\n\nProject Status\nProject Atlas is developing a customer support analytics system. The planned release date is 30 October\n2026. The authentication module is complete, while the analytics dashboard is 85% complete.\nCurrent Issue\nThe reporting API is unstable and is delaying integration testing.\nTasks\nRiya must stabilize the reporting API by 15 September 2026. Aman must complete dashboard testing by 18\nSeptember 2026. The QA team must prepare regression test cases by 20 September 2026.\nRisks\nIf the reporting API remains unstable, the planned release may be delayed. The external analytics provider\nhas also not confirmed the final API version.\nDecisions\nThe team decided to release the analytics dashboard first and move advanced reporting features to Phase 2.",
+    "createdAt": "2026-09-02T18:04:39.243Z",
+    "updatedAt": "2026-09-02T18:04:39.243Z",
+    "tasks": [
+      {
+        "id": "b9ab93be-229f-4944-b727-898941aec510",
+        "documentId": "8e275d78-07ca-468d-be54-b7c950a61717",
+        "title": "Stabilize reporting API",
+        "description": null,
+        "owner": "Riya",
+        "deadline": "15 September 2026",
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Riya must stabilize the reporting API by 15 September 2026.",
+        "createdAt": "2026-09-02T18:04:39.251Z",
+        "updatedAt": "2026-09-02T18:04:39.251Z"
+      },
+      {
+        "id": "50b91fe3-01da-4efd-9218-46a7a054bd6e",
+        "documentId": "8e275d78-07ca-468d-be54-b7c950a61717",
+        "title": "Complete dashboard testing",
+        "description": null,
+        "owner": "Aman",
+        "deadline": "18 September 2026",
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Aman must complete dashboard testing by 18 September 2026.",
+        "createdAt": "2026-09-02T18:04:39.258Z",
+        "updatedAt": "2026-09-02T18:04:39.258Z"
+      },
+      {
+        "id": "7195edac-2971-49a6-a9d4-d446c2d13c1b",
+        "documentId": "8e275d78-07ca-468d-be54-b7c950a61717",
+        "title": "Prepare regression test cases",
+        "description": null,
+        "owner": "QA team",
+        "deadline": "20 September 2026",
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "The QA team must prepare regression test cases by 20 September 2026.",
+        "createdAt": "2026-09-02T18:04:39.267Z",
+        "updatedAt": "2026-09-02T18:04:39.267Z"
+      }
+    ],
+    "risks": [
+      {
+        "id": "836a3d43-3027-47a2-9ec5-9087a8cf1c8a",
+        "documentId": "8e275d78-07ca-468d-be54-b7c950a61717",
+        "title": "Reporting API instability may delay release",
+        "description": "If the reporting API remains unstable, the planned release may be delayed.",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "If the reporting API remains unstable, the planned release may be delayed.",
+        "createdAt": "2026-09-02T18:04:39.271Z",
+        "updatedAt": "2026-09-02T18:04:39.271Z"
+      },
+      {
+        "id": "6dd06b6f-036f-4856-8f9d-3819aad0c265",
+        "documentId": "8e275d78-07ca-468d-be54-b7c950a61717",
+        "title": "Unconfirmed external analytics provider API version",
+        "description": "The external analytics provider has also not confirmed the final API version.",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "The external analytics provider has also not confirmed the final API version.",
+        "createdAt": "2026-09-02T18:04:39.276Z",
+        "updatedAt": "2026-09-02T18:04:39.276Z"
+      }
+    ],
+    "decisions": [
+      {
+        "id": "54fa1340-c916-41e6-b4e9-7c45f118813f",
+        "documentId": "8e275d78-07ca-468d-be54-b7c950a61717",
+        "title": "Release analytics dashboard first and move advanced reporting to Phase 2",
+        "description": "The team decided to release the analytics dashboard first and move advanced reporting features to Phase 2.",
+        "sourcePageNumber": null,
+        "sourceEvidence": "The team decided to release the analytics dashboard first and move advanced reporting features to Phase 2.",
+        "createdAt": "2026-09-02T18:04:39.279Z",
+        "updatedAt": "2026-09-02T18:04:39.279Z"
+      }
+    ]
+  },
+  {
+    "id": "2608dc4e-7f4e-455f-b61d-886e3b2d9503",
+    "userId": "e2a4e4d1-cf75-4f1e-a077-999dc41002f7",
+    "originalName": "02_Contract_Review.pdf",
+    "storedFilename": "1788374644734-37113804.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 27213,
+    "pageCount": 1,
+    "summary": "The company is reviewing a three‑year cloud data‑processing contract that offers a 12% cost reduction but only 99.5% availability, below the 99.9% internal requirement. Legal, compliance, and procurement teams have specific tasks to strengthen data‑loss clauses, verify backup locations, and negotiate higher availability. Management must decide by 25 September 2026 whether to sign or continue negotiations.",
+    "cleanedText": "Cloud Service Contract Review\n\nBackground\nThe company is evaluating a three-year cloud data-processing contract with a service provider.\nFindings\nThe proposal offers a 12% cost reduction. However, service availability is guaranteed at only 99.5%, while the\ninternal requirement is 99.9%.\nTasks\nThe legal team must request stronger data-loss clauses. The compliance team must verify backup-data\nlocations. Procurement must negotiate a 99.9% availability commitment.\nRisks\nThe lower availability guarantee may affect business operations. Data-loss penalties are unclear. Backup\ndata may be stored in another geographic region, creating compliance concerns.\nDecisions\nManagement must decide whether to sign the contract before 25 September 2026 or continue negotiations.",
+    "createdAt": "2026-09-02T18:44:08.257Z",
+    "updatedAt": "2026-09-02T18:44:08.257Z",
+    "tasks": [
+      {
+        "id": "e30c71f1-d2b4-4133-a034-a966bf61b21b",
+        "documentId": "2608dc4e-7f4e-455f-b61d-886e3b2d9503",
+        "title": "Request stronger data‑loss clauses",
+        "description": "The legal team must request stronger data‑loss clauses.",
+        "owner": "legal team",
+        "deadline": null,
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "The legal team must request stronger data‑loss clauses.",
+        "createdAt": "2026-09-02T18:44:08.278Z",
+        "updatedAt": "2026-09-02T18:44:08.278Z"
+      },
+      {
+        "id": "35961253-29c9-4029-9fab-cb3ae587bb59",
+        "documentId": "2608dc4e-7f4e-455f-b61d-886e3b2d9503",
+        "title": "Verify backup‑data locations",
+        "description": "The compliance team must verify backup‑data locations.",
+        "owner": "compliance team",
+        "deadline": null,
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "The compliance team must verify backup‑data locations.",
+        "createdAt": "2026-09-02T18:44:08.286Z",
+        "updatedAt": "2026-09-02T18:44:08.286Z"
+      },
+      {
+        "id": "58556e56-430b-4ccf-a481-505c73c8006a",
+        "documentId": "2608dc4e-7f4e-455f-b61d-886e3b2d9503",
+        "title": "Negotiate 99.9% availability commitment",
+        "description": "Procurement must negotiate a 99.9% availability commitment.",
+        "owner": "procurement",
+        "deadline": null,
+        "priority": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Procurement must negotiate a 99.9% availability commitment.",
+        "createdAt": "2026-09-02T18:44:08.289Z",
+        "updatedAt": "2026-09-02T18:44:08.289Z"
+      }
+    ],
+    "risks": [
+      {
+        "id": "2b6e72f1-4bd0-4541-918b-88738cd9e4e5",
+        "documentId": "2608dc4e-7f4e-455f-b61d-886e3b2d9503",
+        "title": "Lower availability guarantee may affect business operations",
+        "description": "The lower availability guarantee may affect business operations.",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "The lower availability guarantee may affect business operations.",
+        "createdAt": "2026-09-02T18:44:08.292Z",
+        "updatedAt": "2026-09-02T18:44:08.292Z"
+      },
+      {
+        "id": "be5a4ee6-0a99-42bb-9bf2-ba9402c6af60",
+        "documentId": "2608dc4e-7f4e-455f-b61d-886e3b2d9503",
+        "title": "Data‑loss penalties unclear",
+        "description": "Data‑loss penalties are unclear.",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Data‑loss penalties are unclear.",
+        "createdAt": "2026-09-02T18:44:08.296Z",
+        "updatedAt": "2026-09-02T18:44:08.296Z"
+      },
+      {
+        "id": "764cb530-3f2c-423a-ba38-3656c52e2a87",
+        "documentId": "2608dc4e-7f4e-455f-b61d-886e3b2d9503",
+        "title": "Backup data stored in another region, compliance concerns",
+        "description": "Backup data may be stored in another geographic region, creating compliance concerns.",
+        "severity": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "Backup data may be stored in another geographic region, creating compliance concerns.",
+        "createdAt": "2026-09-02T18:44:08.298Z",
+        "updatedAt": "2026-09-02T18:44:08.298Z"
+      }
+    ],
+    "decisions": [
+      {
+        "id": "977a8c2f-bad8-4651-a1e5-72ba7dda5250",
+        "documentId": "2608dc4e-7f4e-455f-b61d-886e3b2d9503",
+        "title": "Sign contract before 25 September 2026 or continue negotiations",
+        "description": "Management must decide whether to sign the contract before 25 September 2026 or continue negotiations.",
+        "sourcePageNumber": null,
+        "sourceEvidence": "Management must decide whether to sign the contract before 25 September 2026 or continue negotiations.",
+        "createdAt": "2026-09-02T18:44:08.300Z",
+        "updatedAt": "2026-09-02T18:44:08.300Z"
+      }
+    ]
+  }
+]

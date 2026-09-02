@@ -1,0 +1,166 @@
+[
+  {
+    "id": "5dd236c7-37d7-4464-8a0a-ea7d3865343b",
+    "userId": "5427ccb5-3a6c-4188-8ef0-d68bbafb61e6",
+    "originalName": "Document_No_Tasks.pdf",
+    "storedFilename": "Document_No_Tasks.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 1000,
+    "pageCount": 1,
+    "summary": "The status update reports good progress and system stability. It highlights a risk that the budget may run out before Q3 and notes the decision to cancel the summer party.",
+    "cleanedText": "Status Update\nProgress is good. The system is stable.\nRisks: The budget might run out before Q3.\nDecisions: We decided to cancel the summer party.",
+    "createdAt": "2026-09-02T19:02:19.786Z",
+    "updatedAt": "2026-09-02T19:02:19.786Z",
+    "decisions": [
+      {
+        "id": "88b56562-a6b6-433c-aa00-394c591c6a29",
+        "documentId": "5dd236c7-37d7-4464-8a0a-ea7d3865343b",
+        "title": "Cancel summer party",
+        "description": "We decided to cancel the summer party.",
+        "sourcePageNumber": null,
+        "sourceEvidence": "We decided to cancel the summer party.",
+        "createdAt": "2026-09-02T19:02:19.803Z",
+        "updatedAt": "2026-09-02T19:02:19.803Z"
+      }
+    ]
+  },
+  {
+    "id": "e7dbe4ca-67e7-473d-8b4b-884e9afd3d9e",
+    "userId": "5427ccb5-3a6c-4188-8ef0-d68bbafb61e6",
+    "originalName": "Document_No_Risks.pdf",
+    "storedFilename": "Document_No_Risks.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 1000,
+    "pageCount": 1,
+    "summary": "The document provides an update on project tasks and decisions. Alice is tasked with completing the design by 10 October 2026. The team has agreed to use a blue theme.",
+    "cleanedText": "Update 2\nTasks: Alice must finish the design by 10 October 2026.\nDecisions: We agreed on the blue theme.",
+    "createdAt": "2026-09-02T19:02:43.260Z",
+    "updatedAt": "2026-09-02T19:02:43.260Z",
+    "decisions": [
+      {
+        "id": "39e35a2e-354d-48e9-b0b4-ff16df42b523",
+        "documentId": "e7dbe4ca-67e7-473d-8b4b-884e9afd3d9e",
+        "title": "Blue theme agreement",
+        "description": "We agreed on the blue theme.",
+        "sourcePageNumber": null,
+        "sourceEvidence": "We agreed on the blue theme.",
+        "createdAt": "2026-09-02T19:02:43.266Z",
+        "updatedAt": "2026-09-02T19:02:43.266Z"
+      }
+    ]
+  },
+  {
+    "id": "d7e26159-1366-48ad-9075-dbaea50ce371",
+    "userId": "5427ccb5-3a6c-4188-8ef0-d68bbafb61e6",
+    "originalName": "Document_No_Decisions.pdf",
+    "storedFilename": "Document_No_Decisions.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 1000,
+    "pageCount": 1,
+    "summary": "The document outlines a security audit focusing on firewall holes. Bob is tasked with fixing them by 12 Nov 2026. Failure to address the holes could lead to an imminent data breach.",
+    "cleanedText": "Security Audit\nTasks: Bob to fix firewall holes by 12 Nov 2026.\nRisks: If holes are not fixed, data breach is imminent.",
+    "createdAt": "2026-09-02T19:02:47.163Z",
+    "updatedAt": "2026-09-02T19:02:47.163Z",
+    "decisions": []
+  },
+  {
+    "id": "ac72eece-d439-462d-b7c7-376a712b7f18",
+    "userId": "5427ccb5-3a6c-4188-8ef0-d68bbafb61e6",
+    "originalName": "Document_Long.pdf",
+    "storedFilename": "Document_Long.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 1000,
+    "pageCount": 1,
+    "summary": "The Annual Review 2025 reports overall positive performance but lists several upcoming tasks, a risk, and a decision regarding cloud migration. Management must review performance by Jan 1 2027; Finance must submit tax reports by Feb 15 2027; Engineering must migrate to Cloud by Mar 5 2027. The migration delay could cost $50k, and the team chose AWS over GCP.",
+    "cleanedText": "Annual Review 2025\nThings are going well. Things are going well. Things are going well. Things are going well. Things\nare going well. Things are going well. Things are going well. Things are going well. Things are going\nwell. Things are going well. Things are going well. Things are going well. Things are going well.\nThings are going well. Things are going well. Things are going well. Things are going well. Things\nare going well. Things are going well. Things are going well. Things are going well. Things are going\nwell. Things are going well. Things are going well. Things are going well. Things are going well.\nThings are going well. Things are going well. Things are going well. Things are going well. Things\nare going well. Things are going well. Things are going well. Things are going well. Things are going\nwell. Things are going well. Things are going well. Things are going well. Things are going well.\nThings are going well. Things are going well. Things are going well. Things are going well. Things\nare going well. Things are going well. Things are going well. Things are going well. Things are going\nwell. Things are going well. Things are going well.\nHowever, we have issues.\nTasks:\n- Management needs to review performance by 1 Jan 2027.\n- Finance team must submit tax reports by 15 Feb 2027.\n- Engineering strictly must migrate to Cloud by 5 March 2027.\nRisks:\n- Migration delay could cost $50k.\nDecisions:\n- We chose AWS over GCP.",
+    "createdAt": "2026-09-02T19:02:51.134Z",
+    "updatedAt": "2026-09-02T19:02:51.134Z",
+    "decisions": [
+      {
+        "id": "bcca4621-6f50-485e-aaa8-934fe164c7f6",
+        "documentId": "ac72eece-d439-462d-b7c7-376a712b7f18",
+        "title": "Cloud provider selection",
+        "description": null,
+        "sourcePageNumber": null,
+        "sourceEvidence": "We chose AWS over GCP.",
+        "createdAt": "2026-09-02T19:02:51.140Z",
+        "updatedAt": "2026-09-02T19:02:51.140Z"
+      }
+    ]
+  },
+  {
+    "id": "d31df68c-1777-406e-9b7f-d687a85453dc",
+    "userId": "5427ccb5-3a6c-4188-8ef0-d68bbafb61e6",
+    "originalName": "Document_Conflicting.pdf",
+    "storedFilename": "Document_Conflicting.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 1000,
+    "pageCount": 1,
+    "summary": "The document discusses a deadline conflict, ultimately deciding on 5th Jan as final. It notes a task for Charlie to finish coding by that date and highlights a risk of confusion. The team confirms the new deadline.",
+    "cleanedText": "Initial thoughts\nActually, nevermind.\nSection A states: The deadline is 1st Jan.\nSection B clarifies: The deadline was moved to 5th Jan.\nTasks:\n- Charlie must finish coding by 5th Jan.\nRisks: Conflicting timelines might confuse stakeholders.\nDecisions: The team decided to adopt 5th Jan as final.",
+    "createdAt": "2026-09-02T19:02:55.748Z",
+    "updatedAt": "2026-09-02T19:02:55.748Z",
+    "decisions": [
+      {
+        "id": "170f90db-be6e-4249-9883-544df1f94922",
+        "documentId": "d31df68c-1777-406e-9b7f-d687a85453dc",
+        "title": "Adopt 5th Jan as final deadline",
+        "description": "The team decided to adopt 5th Jan as final",
+        "sourcePageNumber": null,
+        "sourceEvidence": "The team decided to adopt 5th Jan as final",
+        "createdAt": "2026-09-02T19:02:55.753Z",
+        "updatedAt": "2026-09-02T19:02:55.753Z"
+      }
+    ]
+  },
+  {
+    "id": "ad0911d7-31a9-45ed-b8c3-b59463f4f7f7",
+    "userId": "5427ccb5-3a6c-4188-8ef0-d68bbafb61e6",
+    "originalName": "Document_Pending_Mixed.pdf",
+    "storedFilename": "Document_Pending_Mixed.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 1000,
+    "pageCount": 1,
+    "summary": "The document summarizes a strategy meeting, outlining a task for Dan, a decision to use React, and a risk of lacking developers.",
+    "cleanedText": "Strategy Meeting\nTasks: Dan will organize the next meeting on Monday.\nDecisions: The team decided to use React. Management must decide whether to hire more devs.\nRisks: Lack of devs could delay project.",
+    "createdAt": "2026-09-02T19:03:00.057Z",
+    "updatedAt": "2026-09-02T19:03:00.057Z",
+    "decisions": [
+      {
+        "id": "83fc1ea8-c8f6-4867-a78e-642332181694",
+        "documentId": "ad0911d7-31a9-45ed-b8c3-b59463f4f7f7",
+        "title": "Use React",
+        "description": "The team decided to use React",
+        "sourcePageNumber": null,
+        "sourceEvidence": "The team decided to use React",
+        "createdAt": "2026-09-02T19:03:00.060Z",
+        "updatedAt": "2026-09-02T19:03:00.060Z"
+      }
+    ]
+  },
+  {
+    "id": "64e7fcc5-cc39-4bd0-ba60-9cae238f7bc1",
+    "userId": "5427ccb5-3a6c-4188-8ef0-d68bbafb61e6",
+    "originalName": "Document_Irrelevant.pdf",
+    "storedFilename": "Document_Irrelevant.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 1000,
+    "pageCount": 1,
+    "summary": "The document reports a lobby issue involving pineapple scent and leftover pizza, outlines a cleaning task for the janitor, identifies a risk of ants, and notes a decision to ban pineapples. It highlights immediate actions and a policy change.",
+    "cleanedText": "Lobby Update\nThe lobby smells like pineapples today. Someone left a pizza on the desk.\nTasks: Janitor must clean the lobby by 10 AM tomorrow.\nRisks: Ants may invade the office due to pizza.\nDecisions: HR decided to ban pineapples in the office.",
+    "createdAt": "2026-09-02T19:03:04.188Z",
+    "updatedAt": "2026-09-02T19:03:04.188Z",
+    "decisions": [
+      {
+        "id": "24cd6724-7cae-4147-a58a-18d0a0443d2e",
+        "documentId": "64e7fcc5-cc39-4bd0-ba60-9cae238f7bc1",
+        "title": "HR decided to ban pineapples in the office",
+        "description": "HR decided to ban pineapples in the office",
+        "sourcePageNumber": null,
+        "sourceEvidence": "HR decided to ban pineapples in the office",
+        "createdAt": "2026-09-02T19:03:04.192Z",
+        "updatedAt": "2026-09-02T19:03:04.192Z"
+      }
+    ]
+  }
+]
